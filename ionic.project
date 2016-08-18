@@ -1,0 +1,12 @@
+{
+  "name": "travelApp",
+  "app_id": "733216fb",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
