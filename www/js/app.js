@@ -29,7 +29,7 @@ angular.module('starter', ['ionic', 'firebase', 'ngCordova'])
   $stateProvider
   .state('login', {
     url: '/',
-    templateUrl: 'index.html',
+    templateUrl: 'templates/login.html',
     controller: 'ListCtrl'
   })
   // .state('signup', {
@@ -41,7 +41,6 @@ angular.module('starter', ['ionic', 'firebase', 'ngCordova'])
   $urlRouterProvider.otherwise("/");
  
 })
-
 
 
 .controller('ListCtrl', function($scope){

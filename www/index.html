@@ -57,13 +57,20 @@
     </ion-header-bar>
  -->    
         <!--  LOGIN -->
-    
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>        
+    <div class="g-signin2 loginBtn" data-onsuccess="onSignIn"></div>        
+    <ion-content>
 
-    <a href="#" onclick="signOut();">Sign out</a>
+
+        <a href="#" onclick="signOut()">Sign out</a>
+    </ion-content>
+    <ion-nav-view></ion-nav-view> 
+
+
+
+
+
 
     <script>
-
         // Check that user is not already signed in
         function isUserEqual(googleUser, firebaseUser) {  
           if (firebaseUser) {
@@ -72,12 +79,10 @@
               if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
                   providerData[i].uid === googleUser.getBasicProfile().getId()) {
                 // We don't need to reauth the Firebase connection.
-                console.log("This is true: " + true);
                 return true;
               }
             }
           }
-          console.log("This is false"+ false);
           return false;
         }
         
@@ -130,14 +135,7 @@
     </div> -->
        
         <!-- CONTENT -->
- <!--    <ion-content>
-        <ion-list>
-            <ion-item ng-repeat="item in items">
-                {{item.name}}
-            </ion-item>
-        </ion-list>
-    </ion-content> -->
-<!--     <ion-nav-view></ion-nav-view>  -->
+
   </body>
 </html>
 

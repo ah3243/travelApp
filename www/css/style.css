@@ -3,3 +3,9 @@
 	border-width: 3px;
 	border-color: black;
 }
+
+.loginBtn{
+	position:fixed;
+	top:60%;
+	right:35%;
+}
