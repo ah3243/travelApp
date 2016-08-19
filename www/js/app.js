@@ -20,8 +20,6 @@ angular.module('starter', ['ionic', 'firebase', 'ngCordova'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
- 
-    Parse.initialize("YOUR APP ID", "JAVASCRIPT KEY");
       
   });
 })
@@ -31,13 +29,50 @@ angular.module('starter', ['ionic', 'firebase', 'ngCordova'])
   $stateProvider
   .state('login', {
     url: '/',
-    templateUrl: 'templates/login.html'
-  });
+    templateUrl: 'index.html',
+    controller: 'ListCtrl'
+  })
+  // .state('signup', {
+  //   url: '/signup',
+  //   templateUrl: 'templates/signup.html',
+  //   controller: 'LoginCtrl'
+  // });
  
   $urlRouterProvider.otherwise("/");
  
 })
 
-.controller('LoginCtrl', function($scope, $state, $cordovaFacebook){
 
-})
+
+.controller('ListCtrl', function($scope){
+    $scope.login = function(){
+      console.log("Logging in..");
+
+      // function onSignIn(googleUser) {
+      //   var profile = googleUser.getBasicProfile();
+      //   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      //   console.log('Name: ' + profile.getName());
+      //   console.log('Image URL: ' + profile.getImageUrl());
+      //   console.log('Email: ' + profile.getEmail());
+      // }
+
+//        Auth.$authWithOAuthRedirect("facebook");
+      return ;
+    }
+
+    $scope.items = 'Hello';
+
+    $scope.addItem = function(){
+        var name = prompt("what do you need to buy?");
+        if(name){
+            $scope.items.$add({
+                "name":name
+            });
+        }    
+      return;   
+    };          
+});
+
+
+
+

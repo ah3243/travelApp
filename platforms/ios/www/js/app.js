@@ -20,6 +20,7 @@ angular.module('starter', ['ionic', 'firebase', 'ngCordova'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+      
   });
 })
 
@@ -28,13 +29,132 @@ angular.module('starter', ['ionic', 'firebase', 'ngCordova'])
   $stateProvider
   .state('login', {
     url: '/',
-    templateUrl: 'templates/login.html'
-  });
+    templateUrl: 'index.html',
+    controller: 'ListCtrl'
+  })
+  // .state('signup', {
+  //   url: '/signup',
+  //   templateUrl: 'templates/signup.html',
+  //   controller: 'LoginCtrl'
+  // });
  
   $urlRouterProvider.otherwise("/");
  
 })
 
-.controller('LoginCtrl', function($scope, $state, $cordovaFacebook){
-
+.factory("Auth", function($firebaseAuth){
+    var usersRef = new Firebase("https://travelapp-6f39f.firebaseio.com/users");
+    return $firebaseAuth(usersRef);
 })
+
+.factory("Items", function($firebaseArray){
+    var itemsRef = new Firebase("https://travelapp-6f39f.firebaseio.com/items");
+    return $firebaseArray(itemsRef)
+})
+
+.controller('ListCtrl', function($scope, Items, Auth){
+    $scope.login1 = function(){
+        Auth.$authWithOAuthRedirect("facebook");
+    }
+
+    $scope.items = Items;
+
+    $scope.addItem = function(){
+        var name = prompt("what do you need to buy?");
+        if(name){
+            $scope.items.$add({
+                "name":name
+            });
+        }    
+    };  
+        
+});
+
+
+
+
+//  // The Original Controllers //
+// .controller('LoginCtrl', function($scope, $state, $cordovaFacebook){
+//     $scope.data={};
+
+//     $scope.signupEmail = function(){
+//       var ref = new Firebase("https://travelapp-6f39f.firebaseio.com");
+     
+//       ref.createUser({
+//         email    : $scope.data.email,
+//         password : $scope.data.password
+//       }, function(error, userData) {
+//         if (error) {
+//           console.log("User:" + $scope.data.email + " password: " + $scope.data.password);
+//           console.log("Error creating user:", error);
+//         } else {
+//           console.log("Successfully created user account with uid:", userData.uid);
+//         }
+//       });    
+//     };
+
+//     $scope.loginEmail = function(){
+//       var ref = new Firebase("https://travelapp-6f39f.firebaseio.com");
+     
+//       ref.authWithPassword({
+//         email    : $scope.data.email,
+//         password : $scope.data.password
+//       }, function(error, authData) {
+//         if (error) {
+//           console.log("Login Failed!", error);
+//         } else {
+//           console.log("Authenticated successfully with payload:", authData);
+//         }
+//       });    
+//     };
+
+//     $scope.loginFacebook = function(){
+ 
+//       var ref = new Firebase("https://travelapp-6f39f.firebaseio.com");
+     
+     
+//       if(ionic.Platform.isWebView()){
+     
+//         $cordovaFacebook.login(["public_profile", "email"]).then(function(success){
+     
+//           console.log(success);
+     
+//           ref.authWithOAuthToken("facebook", success.authResponse.accessToken, function(error, authData) {
+//             if (error) {
+//               console.log('Firebase login failed!', error);
+//             } else {
+//               console.log('Authenticated successfully with payload:', authData);
+//             }
+//           });
+     
+//         }, function(error){
+//           console.log(error);
+//         });        
+     
+//       }
+//       else {
+     
+//         ref.authWithOAuthPopup("facebook", function(error, authData) {
+//           if (error) {
+//             console.log("Login Failed!", error);
+//           } else {
+//             console.log("Authenticated successfully with payload:", authData);
+//           }
+//         });
+     
+//       }
+     
+//     };
+
+// })
+
+
+
+
+
+
+
+
+
+
+
